@@ -18,23 +18,15 @@ export const getAll = async (req, res) => {
     }
 };
 
-export const getPendientes = async (req, res) => {
+export const getTabla1 = async (req, res) => {
     try {
-        const lista = await clienteSolicitudesModule.getPendientes();
+        const lista = await clienteSolicitudesModule.getTabla1();
         res.status(200).json(lista);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
 };
 
-export const getRechazados = async (req, res) => {
-    try {
-        const lista = await clienteSolicitudesModule.getRechazados();
-        res.status(200).json(lista);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-};
 
 export const rechazarRegistro = async (req, res) => {
     try {

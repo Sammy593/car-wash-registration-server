@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/', solicitudController.create);
 router.get('/', solicitudController.getAll);
-router.get('/getPendientes', solicitudController.getPendientes);
+router.get('/getTabla1', solicitudController.getTabla1);
 router.post('/rechazarRegistro', solicitudController.rechazarRegistro);
 router.post('/aceptarRegistro', solicitudController.aceptarRegistro);
 router.post('/actualizarRegistro', solicitudController.actualizarRegistro);

@@ -16,21 +16,15 @@ export const getAll = async () => {
     }
 };
 
-export const getPendientes = async () => {
+export const getTabla1 = async () => {
     try {
-        return await Solicitud.find({estado: 'Pendiente'});
+        //Obtiene los registro con estado pendiente y rechazado
+        return await Solicitud.find({estado: { $in: ["Pendiente", "Rechazado"] }});
     } catch (err) {
         throw new Error(`Error al buscar: ${err.message}`);
     }
 };
 
-export const getRechazados = async () => {
-    try {
-        return await Solicitud.find({estado: 'Rechazado'});
-    } catch (err) {
-        throw new Error(`Error al buscar: ${err.message}`);
-    }
-};
 
 export const rechazarRegistro = async (idSolicitud) => {
     try {

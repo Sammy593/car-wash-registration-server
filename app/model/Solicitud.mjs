@@ -32,7 +32,8 @@ const solicitudSchema = new mongoose.Schema({
         type: String
     },
     estado: {
-        type: String
+        type: String,
+        default: "Pendiente"
     }
 });
 
