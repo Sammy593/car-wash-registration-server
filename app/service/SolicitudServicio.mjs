@@ -1,4 +1,5 @@
 import Solicitud from '../model/Solicitud.mjs';
+import { sendGmail } from '../../config/email.mjs';
 
 export const create = async (data) => {
     try {
@@ -40,8 +41,9 @@ export const getTabla1 = async () => {
 
 export const rechazarRegistro = async (idSolicitud) => {
     try {
-        
-        return await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Rechazado' } });
+        const solicitud = await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Rechazado' } });
+        //enviar correo
+        return await sendGmail(idSolicitud, solicitud.email);
     } catch (err) {
         throw new Error(`Error al crear: ${err.message}`);
     }

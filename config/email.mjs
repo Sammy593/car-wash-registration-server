@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import email1 from '../docs/email_templates/correo1.mjs'
+import {email1} from '../docs/email_templates/correo1.mjs'
 
 export const sendGmail = async (idSolicitud, correo) => {
     try {
