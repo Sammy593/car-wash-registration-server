@@ -20,7 +20,7 @@ export const getAll = async (req, res) => {
 
 export const getById = async (req, res) => {
     try {
-        const dato = await clienteSolicitudesModule.getById(req.param.idSolicitud);
+        const dato = await clienteSolicitudesModule.getById(req.params.id);
         res.status(200).json(dato);
     } catch (err) {
         res.status(400).json({ message: err.message });

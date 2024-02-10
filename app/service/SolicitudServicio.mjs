@@ -16,9 +16,13 @@ export const getAll = async () => {
     }
 };
 
-export const getById = async (idPedido) => {
+export const getById = async (idSolicitud) => {
     try {
-        return await Solicitud.findById({idPedido});
+        const solicitud = await Solicitud.findOne({ _id: idSolicitud });
+        if (!solicitud) {
+          throw new Error('Solicitud no encontrada');
+        }
+        return solicitud;
     } catch (err) {
         throw new Error(`Error al obtener lista: ${err.message}`);
     }
