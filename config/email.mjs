@@ -27,6 +27,6 @@ export const sendGmail = async (idSolicitud, correo) => {
         return result;
     })
     } catch (err) {
-        throw new Error(`Error al crear: ${err.message}`);
+        throw new Error(`Error al enviar: ${err.message}`);
     }
 };

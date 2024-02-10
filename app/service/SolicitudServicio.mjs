@@ -18,7 +18,7 @@ export const getAll = async () => {
 
 export const getById = async (idPedido) => {
     try {
-        return await Solicitud.findOne({_id: idPedido});
+        return await Solicitud.findById({idPedido});
     } catch (err) {
         throw new Error(`Error al obtener lista: ${err.message}`);
     }
