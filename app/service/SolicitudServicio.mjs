@@ -16,6 +16,14 @@ export const getAll = async () => {
     }
 };
 
+export const getById = async (idPedido) => {
+    try {
+        return await Solicitud.findOne({_id: idPedido});
+    } catch (err) {
+        throw new Error(`Error al obtener lista: ${err.message}`);
+    }
+};
+
 export const getTabla1 = async () => {
     try {
         //Obtiene los registro con estado pendiente y rechazado
@@ -28,6 +36,7 @@ export const getTabla1 = async () => {
 
 export const rechazarRegistro = async (idSolicitud) => {
     try {
+        
         return await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Rechazado' } });
     } catch (err) {
         throw new Error(`Error al crear: ${err.message}`);
