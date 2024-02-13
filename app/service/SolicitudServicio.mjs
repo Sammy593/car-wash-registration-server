@@ -41,7 +41,7 @@ export const getTabla1 = async () => {
 export const getTablaAceptados = async () => {
     try {
         //Obtiene los registro con estado pendiente y rechazado
-        return await Solicitud.find({estado: { $in: ["Aceptado"] }});
+        return await Solicitud.find({estado: { $in: ["Aceptado", "Pagado"] }});
     } catch (err) {
         throw new Error(`Error al buscar: ${err.message}`);
     }
@@ -61,6 +61,14 @@ export const rechazarRegistro = async (idSolicitud) => {
 export const impagoRegistro = async (idSolicitud) => {
     try {
         return await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Impago' } });
+    } catch (err) {
+        throw new Error(`Error al crear: ${err.message}`);
+    }
+};
+
+export const pagoRegistro = async (idSolicitud) => {
+    try {
+        return await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Pagado' } });
     } catch (err) {
         throw new Error(`Error al crear: ${err.message}`);
     }
