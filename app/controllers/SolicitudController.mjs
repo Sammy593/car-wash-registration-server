@@ -91,6 +91,16 @@ export const actualizarRegistro = async (req, res) => {
     }
 };
 
+export const actualizarPagoRegistro = async (req, res) => {
+    try {
+        //console.log(req);
+        const solicitud = await clienteSolicitudesModule.actualizarPagoRegistro(req.body.idSolicitud, req.body);
+        res.status(200).json(solicitud);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
 export const confirmarRegistro = async (req, res) => {
     try {
         const solicitud = await clienteSolicitudesModule.confirmarRegistro(req.body.idSolicitud);

@@ -1,7 +1,8 @@
 import nodemailer from 'nodemailer';
-import {email1} from '../docs/email_templates/correo1.mjs'
+import {email1} from '../docs/email_templates/correo1.mjs';
+import {email2} from '../docs/email_templates/correo2.mjs'
 
-export const sendGmail = async (idSolicitud, correo) => {
+export const sendGmail = async (idSolicitud, correo, tipo) => {
     try {
 
     let config = nodemailer.createTransport({
@@ -13,12 +14,25 @@ export const sendGmail = async (idSolicitud, correo) => {
         }
     });
 
-    const opciones = {
-        from:'Car Wash Registration',
-        subject: 'Corrección de datos de solicitud',
-        to: correo,
-        html: email1(idSolicitud)
-    };
+    var opciones;
+
+    if(tipo == 1){
+            opciones = {
+            from:'Car Wash Registration',
+            subject: 'Corrección de datos de solicitud',
+            to: correo,
+            html: email1(idSolicitud)
+        };
+    }else{
+            opciones = {
+            from:'Car Wash Registration',
+            subject: 'Realizar pago',
+            to: correo,
+            html: email2(idSolicitud)
+        };
+    }
+
+    
 
     config.sendMail(opciones,function(error, result){
         if(error){

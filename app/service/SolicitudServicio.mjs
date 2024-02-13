@@ -1,5 +1,6 @@
 import Solicitud from '../model/Solicitud.mjs';
 import { sendGmail } from '../../config/email.mjs';
+import fs from 'fs';
 
 export const create = async (data) => {
     try {
@@ -41,7 +42,7 @@ export const getTabla1 = async () => {
 export const getTablaAceptados = async () => {
     try {
         //Obtiene los registro con estado pendiente y rechazado
-        return await Solicitud.find({estado: { $in: ["Aceptado", "Pagado"] }});
+        return await Solicitud.find({estado: { $in: ["Aceptado", "Pagado", "Impago"] }});
     } catch (err) {
         throw new Error(`Error al buscar: ${err.message}`);
     }
@@ -52,7 +53,7 @@ export const rechazarRegistro = async (idSolicitud) => {
     try {
         const solicitud = await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Rechazado' } });
         //enviar correo
-        return await sendGmail(idSolicitud, solicitud.email);
+        return await sendGmail(idSolicitud, solicitud.email, 1);
     } catch (err) {
         throw new Error(`Error al crear: ${err.message}`);
     }
@@ -60,7 +61,8 @@ export const rechazarRegistro = async (idSolicitud) => {
 
 export const impagoRegistro = async (idSolicitud) => {
     try {
-        return await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Impago' } });
+        const solicitud = await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Impago' } });
+        return await sendGmail(idSolicitud, solicitud.email, 2);
     } catch (err) {
         throw new Error(`Error al crear: ${err.message}`);
     }
@@ -89,6 +91,35 @@ export const actualizarRegistro = async (solicitudId, data) => {
             throw new Error('Solicitud no encontrada');
         }
         return actualizado;
+    } catch (err) {
+        throw new Error(`Error al actualizar: ${err.message}`);
+    }
+};
+
+export const actualizarPagoRegistro = async (solicitudId, data) => {
+    try {
+        const solicitud = await Solicitud.findOne({ _id: solicitudId });
+        if (!solicitud) {
+          throw new Error('Solicitud no encontrada');
+        }
+/*
+       // console.log(data);
+        const file = data.archivo;
+        if (!file) {
+            throw new Error('Archivo no encontrado');
+        }
+        const archivoData = fs.readFileSync(file, { encoding: 'base64' });
+*/
+        const calificacion = data.calificacion;
+
+        // Guardar el archivo y otros datos en MongoDB
+        solicitud.file = "archivo";
+        solicitud.calificacion = calificacion;
+        
+        await solicitud.save();
+        //fs.unlinkSync(archivoPath);
+        await pagoRegistro(solicitudId);
+        return { actualizado: solicitud };
     } catch (err) {
         throw new Error(`Error al actualizar: ${err.message}`);
     }

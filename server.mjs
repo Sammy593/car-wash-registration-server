@@ -29,6 +29,7 @@ app.use('/', express.static(path.join(new URL('.', import.meta.url).pathname, '/
 
 // Routes
 import rootRouter from './routes/root.mjs';
+  
 
 app.use('/', rootRouter);
 

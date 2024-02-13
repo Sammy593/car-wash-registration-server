@@ -34,6 +34,15 @@ const solicitudSchema = new mongoose.Schema({
     estado: {
         type: String,
         default: "Pendiente"
+    },
+    calificacion: {
+        type: String, 
+        required: false
+    },
+    file: {
+        //type: Buffer,
+        type: String,
+        required: false
     }
 });
 
