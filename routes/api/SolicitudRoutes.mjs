@@ -8,7 +8,7 @@ router.get('/', solicitudController.getAll);
 router.get('/getById/:id', solicitudController.getById);
 router.get('/getTabla1', solicitudController.getTabla1);
 router.post('/rechazarRegistro', solicitudController.rechazarRegistro);
-router.post('/aceptarRegistro', solicitudController.aceptarRegistro);
+router.post('/impagoRegistro', solicitudController.impagoRegistro);
 router.post('/actualizarRegistro', solicitudController.actualizarRegistro);
 router.post('/confirmarRegistro', solicitudController.confirmarRegistro);
 

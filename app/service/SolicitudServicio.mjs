@@ -49,9 +49,9 @@ export const rechazarRegistro = async (idSolicitud) => {
     }
 };
 
-export const aceptarRegistro = async (idSolicitud) => {
+export const impagoRegistro = async (idSolicitud) => {
     try {
-        return await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Aceptado' } });
+        return await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Impago' } });
     } catch (err) {
         throw new Error(`Error al crear: ${err.message}`);
     }

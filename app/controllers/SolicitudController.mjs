@@ -46,9 +46,9 @@ export const rechazarRegistro = async (req, res) => {
     }
 };
 
-export const aceptarRegistro = async (req, res) => {
+export const impagoRegistro = async (req, res) => {
     try {
-        const solicitud = await clienteSolicitudesModule.aceptarRegistro(req.body.idSolicitud);
+        const solicitud = await clienteSolicitudesModule.impagoRegistro(req.body.idSolicitud);
         res.status(200).json(solicitud);
     } catch (err) {
         res.status(400).json({ message: err.message });
