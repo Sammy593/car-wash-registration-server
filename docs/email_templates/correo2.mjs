@@ -97,7 +97,7 @@ export const email2 = (idSolicitud) => { return `<!DOCTYPE html>
                 </div>
                 <div class="option_container">
                     <div class="button">
-                        <a href="http://localhost:4200/calificacionPago;_id=${idSolicitud}">Ir a formulario</a>
+                        <a href="http://52.22.2.130/hrms#/calificacionPago;_id=${idSolicitud}">Ir a formulario</a>
                     </div>
                 </div>
             </article>
