@@ -64,15 +64,6 @@ export const impagoRegistro = async (req, res) => {
     }
 };
 
-export const pagoRegistro = async (req, res) => {
-    try {
-        const solicitud = await clienteSolicitudesModule.pagoRegistro(req.body.idSolicitud);
-        res.status(200).json(solicitud);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-};
-
 export const aceptarRegistro = async (req, res) => {
     try {
         const solicitud = await clienteSolicitudesModule.aceptarRegistro(req.body.idSolicitud);
@@ -95,15 +86,6 @@ export const actualizarPagoRegistro = async (req, res) => {
     try {
         console.log(req.file.path);
         const solicitud = await clienteSolicitudesModule.actualizarPagoRegistro(req.body.idSolicitud, req);
-        res.status(200).json(solicitud);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-};
-
-export const confirmarRegistro = async (req, res) => {
-    try {
-        const solicitud = await clienteSolicitudesModule.confirmarRegistro(req.body.idSolicitud);
         res.status(200).json(solicitud);
     } catch (err) {
         res.status(400).json({ message: err.message });

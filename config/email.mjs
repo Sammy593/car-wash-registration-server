@@ -1,6 +1,8 @@
 import nodemailer from 'nodemailer';
-import {email1} from '../docs/email_templates/correo1.mjs';
-import {email2} from '../docs/email_templates/correo2.mjs'
+import {email1} from '../docs/email_templates/correo1_rechazarRegistro.mjs';
+import {email2} from '../docs/email_templates/correo2_aceptarRegistro.mjs';
+import {email3} from '../docs/email_templates/correo3_aceptarPago.mjs';
+import {email4} from '../docs/email_templates/correo4_rechazarPago.mjs';
 
 export const sendGmail = async (idSolicitud, correo, tipo) => {
     try {
@@ -15,21 +17,39 @@ export const sendGmail = async (idSolicitud, correo, tipo) => {
     });
 
     var opciones;
-
-    if(tipo == 1){
+    switch(tipo){
+        case 1:
             opciones = {
-            from:'Car Wash Registration',
-            subject: 'Corrección de datos de solicitud',
-            to: correo,
-            html: email1(idSolicitud)
-        };
-    }else{
+                from:'Car Wash Registration',
+                subject: 'Corrección de datos de solicitud',
+                to: correo,
+                html: email1(idSolicitud)
+            };
+            break;
+        case 2:
             opciones = {
-            from:'Car Wash Registration',
-            subject: 'Realizar pago',
-            to: correo,
-            html: email2(idSolicitud)
-        };
+                from:'Car Wash Registration',
+                subject: 'Realizar pago',
+                to: correo,
+                html: email2(idSolicitud)
+            };
+            break;
+        case 3:
+            opciones = {
+                from:'Car Wash Registration',
+                subject: 'Pago aceptado',
+                to: correo,
+                html: email3(idSolicitud)
+            };
+            break;
+        case 4:
+            opciones = {
+                from:'Car Wash Registration',
+                subject: 'Pago rechazado',
+                to: correo,
+                html: email4(idSolicitud)
+            };
+            break;
     }
 
     
