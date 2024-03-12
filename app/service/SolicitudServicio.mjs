@@ -114,7 +114,7 @@ export const actualizarPagoRegistro = async (solicitudId, data) => {
 //Esta funcion e activa al rechazar un pago, se elimina el archivo y se envia un correo para actualizar el pago y calificacion
 export const rechazarPagoAndActualizar = async (idSolicitud) => {
     try {
-        const solicitud = await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Impago' } });
+        const solicitud = await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Impago', file: '', filename: '' } });
         unlink(solicitud.file, (error) => {
             if (error) {
               console.error('Error al eliminar el archivo:', error);
