@@ -23,7 +23,7 @@ export const email4 = (idSolicitud) => { return `<!DOCTYPE html>
                                     <td align="center" style="padding: 20px 0; font-family: Arial, sans-serif; font-weight: 800; font-size: 24px;">Gracias por preferirnos!</td>
                                 </tr>
                                 <tr>
-                                    <td align="center" style="padding: 0 20px; font-family: Arial, sans-serif; font-size: 17px;">Su pago no ha sido comprobado, por favor adjunte nuevamente su comprobante de pago para continuar con el proceso</td>
+                                    <td align="center" style="padding: 0 20px; font-family: Arial, sans-serif; font-size: 17px;">Su pago no podido ser comprobado, por favor adjunte nuevamente su comprobante de pago para continuar con el proceso</td>
                                 </tr>
                                 <tr>
                                     <td align="center" style="padding: 20px 0;">

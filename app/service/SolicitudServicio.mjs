@@ -1,5 +1,6 @@
 import Solicitud from '../model/Solicitud.mjs';
 import { sendGmail } from '../../config/email.mjs';
+import { unlink } from 'fs';
 
 export const create = async (data) => {
     try {
@@ -100,6 +101,7 @@ export const actualizarPagoRegistro = async (solicitudId, data) => {
 
         // Guardar el archivo y otros datos en MongoDB
         solicitud.file = data.file.path;
+        solicitud.filename = data.file.filename;
         solicitud.calificacion = calificacion;
         solicitud.estado = 'Pagado';
         
@@ -109,12 +111,29 @@ export const actualizarPagoRegistro = async (solicitudId, data) => {
         throw new Error(`Error al actualizar: ${err.message}`);
     }
 };
+//Esta funcion e activa al rechazar un pago, se elimina el archivo y se envia un correo para actualizar el pago y calificacion
+export const rechazarPagoAndActualizar = async (idSolicitud) => {
+    try {
+        const solicitud = await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Impago' } });
+        unlink(solicitud.file, (error) => {
+            if (error) {
+              console.error('Error al eliminar el archivo:', error);
+            } else {
+              console.log('Archivo eliminado con éxito');
+            }
+          });
+        return await sendGmail(idSolicitud, solicitud.email, 4);
+    } catch (err) {
+        throw new Error(`Error al crear: ${err.message}`);
+    }
+};
 
 /* Tabla Aceptados:
-esta funcion e activa al aceptar el comprobante de pago
+esta funcion e activa al aceptar el comprobante de pago y envia un correo de notificacion
 */
 export const aceptarRegistro = async (idSolicitud) => {
     try {
+        await sendGmail(idSolicitud, solicitud.email, 3);
         return await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Aceptado' } });
     } catch (err) {
         throw new Error(`Error al crear: ${err.message}`);

@@ -43,6 +43,10 @@ const solicitudSchema = new mongoose.Schema({
         //type: Buffer,
         type: String,
         required: false
+    },
+    filename: {
+        type: String,
+        required: false
     }
 });
 

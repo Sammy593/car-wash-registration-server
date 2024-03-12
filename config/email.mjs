@@ -39,7 +39,7 @@ export const sendGmail = async (idSolicitud, correo, tipo) => {
                 from:'Car Wash Registration',
                 subject: 'Pago aceptado',
                 to: correo,
-                html: email3(idSolicitud)
+                html: email3()
             };
             break;
         case 4:

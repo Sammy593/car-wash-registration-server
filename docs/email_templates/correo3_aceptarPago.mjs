@@ -1,4 +1,4 @@
-export const email3 = (idSolicitud) => { return `<!DOCTYPE html>
+export const email3 = () => { return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
