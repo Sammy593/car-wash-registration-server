@@ -25,8 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Serve static files
-app.use('/', express.static(path.join(new URL('.', import.meta.url).pathname, '/public')));
-
+//app.use('/', express.static(path.join(new URL('.', import.meta.url).pathname, '/public')));
+app.use('/public', express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), '/public')));
+app.use(express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), '/public')));
 // Routes
 import rootRouter from './routes/root.mjs';
   

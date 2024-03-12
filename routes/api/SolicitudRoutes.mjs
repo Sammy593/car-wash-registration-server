@@ -3,14 +3,16 @@ import * as solicitudController from '../../app/controllers/SolicitudController.
 import multer from 'multer';
 
 const storage = multer.diskStorage({
-    destination: './uploads',
+    destination: './public/img',
     filename: (req, file, cb) => {
+      //console.log(file);
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-      cb(null, file.fieldname + '-' + uniqueSuffix + '.' + file.mimetype.split('/')[1]);
+      const newName = file.fieldname + '-' + uniqueSuffix + '.' + file.mimetype.split('/')[1];
+      cb(null, newName);
     }
-  });
+});
   
-  const upload = multer({ storage });
+const upload = multer({ storage });
 
 const router = express.Router();
 router.post('/actualizarPagoRegistro', upload.single('archivo'), solicitudController.actualizarPagoRegistro);
