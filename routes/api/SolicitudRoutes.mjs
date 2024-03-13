@@ -5,7 +5,6 @@ import multer from 'multer';
 const storage = multer.diskStorage({
     destination: './public/img',
     filename: (req, file, cb) => {
-      //console.log(file);
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
       const newName = file.fieldname + '-' + uniqueSuffix + '.' + file.mimetype.split('/')[1];
       cb(null, newName);

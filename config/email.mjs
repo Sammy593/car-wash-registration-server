@@ -16,7 +16,7 @@ export const sendGmail = async (idSolicitud, correo, tipo) => {
         }
     });
 
-    var opciones;
+    let opciones;
     switch(tipo){
         case 1:
             opciones = {

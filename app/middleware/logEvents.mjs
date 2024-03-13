@@ -2,7 +2,6 @@ import { format } from 'date-fns';
 import { v4 as uuid } from 'uuid';
 
 import fs from 'fs';
-import { promises as fsPromises } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -12,14 +11,13 @@ const logEvents = async (message, logName) => {
 
     try {
         const currentDir = path.dirname(fileURLToPath(import.meta.url));
-        const logsDir = path.join(currentDir, '..', 'logs'); 
-        //console.log(logsDir);
+        const logsDir = path.join(currentDir, '..', 'logs');
 
         if (!fs.existsSync(logsDir)) {
-            await fsPromises.mkdir(logsDir, { recursive: true });
+            await fs.promises.mkdir(logsDir, { recursive: true });
         }
 
-        await fsPromises.appendFile(path.join(logsDir, logName), logItem);
+        await fs.promises.appendFile(path.join(logsDir, logName), logItem);
     } catch (err) {
         console.log(err);
     }
