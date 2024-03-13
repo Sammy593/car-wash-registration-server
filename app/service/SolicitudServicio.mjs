@@ -133,9 +133,9 @@ esta funcion e activa al aceptar el comprobante de pago y envia un correo de not
 */
 export const aceptarRegistro = async (idSolicitud) => {
     try {
+        const solicitud = await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Aceptado' } });
         await sendGmail(idSolicitud, solicitud.email, 3);
-        return await Solicitud.findByIdAndUpdate(idSolicitud, { $set: { estado: 'Aceptado' } });
     } catch (err) {
-        throw new Error(`Error al crear: ${err.message}`);
+        throw new Error(`Error al solicitar: ${err.message}`);
     }
 };
