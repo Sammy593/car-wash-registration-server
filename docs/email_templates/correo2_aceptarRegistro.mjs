@@ -30,7 +30,7 @@ export const email2 = (idSolicitud) => { return `<!DOCTYPE html>
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td align="center" bgcolor="#0078d7" style="border-radius: 3px;">
-                                                    <a href="http://52.22.2.130/calificacionPago;_id=${idSolicitud}" target="_blank" style="display: inline-block; padding: 10px 20px; font-family: Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 3px;">Ir a formulario</a>
+                                                    <a href="http://52.22.2.130/pages/calificacion-servicio;_id=${idSolicitud}" target="_blank" style="display: inline-block; padding: 10px 20px; font-family: Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 3px;">Ir a formulario</a>
                                                     </td>
                                                     </tr>
                                                 </table>
